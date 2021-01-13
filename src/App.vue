@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link> 
       
     </div>
     <router-view/>
@@ -15,6 +15,13 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.36);
+  -moz-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.36);
+  box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.36);
+  width: 50%;
+  height: 100%;
+  
+  
 }
 
 #nav {
@@ -25,8 +32,9 @@
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color:black;
     }
   }
 }
+
 </style>

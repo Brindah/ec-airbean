@@ -1,20 +1,17 @@
 <template>
 <div class="bg-image">
-    
+
     <div class="intro-text">
         <router-link to="/Navigation">
             <div class="circel" >  
                 <div class="triangle">
-                <img alt="graphic-loader" src="../assets/graphics/loader.png"> 
+                    <img alt="graphic-loader" src="../assets/graphics/loader.png"> 
                 </div>
             </div>
         </router-link>
-         <h1>{{ rubrikH1 }}</h1>
+        <h1>{{ rubrikH1 }}</h1>
         <h6>{{rubrikH6}}</h6>
-    </div>
-    
-    <!-- <img alt="intro-graphic-right" src="../assets/graphics/intro-graphic-right.svg"> -->
-    
+    </div>  
 </div>
 </template>
 
@@ -25,9 +22,7 @@ export default {
             rubrikH1:'AIR BEAN',
             rubrikH6:'DRONEDELIVERED COFFEE'
     }
-
     }
-
 }
 </script>
 
@@ -37,7 +32,7 @@ export default {
 .bg-image {
     background-image: url("../assets/graphics/intro-graphic-left.svg"), 
                       url("../assets/graphics/intro-graphic-right.svg"); /* The image used */
-    background-color: #1e643b; /* Used if the image is unavailable */
+    background-color:  rgb(47, 119, 47); /* Used if the image is unavailable */
     height: 500px; /* You must set a specified height */
     background-position: left, right; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */

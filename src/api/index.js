@@ -40,4 +40,27 @@ async function fetchCoffe(){
 		}
 	]
 }
-export{fetchCoffe}
+
+async function fetchMeny(){
+    
+    return  [
+		{
+		"name":"/Inloggning",
+		"id":"Min profil"
+		},
+		{
+		"name":"/OrderMeny",
+		"id":"Meny"
+		},
+		{
+		"name":"/About",
+		"id":"Vårt Kaffe"
+		},
+		{
+		"name":"/Home",
+		"id":"Orderstatus"
+		}
+
+	]
+}
+export{fetchCoffe, fetchMeny}

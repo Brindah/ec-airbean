@@ -19,36 +19,34 @@
              v-on:click="dropWindow" >
             
             <div class="counter">
-                {{this.cart.length}}
+                {{totalAmount.toFixed(0)}}
             </div>
             <img class="topIcon" alt="Shopping Bag " src="../assets/graphics/bag.svg">
         </div>
     </header>
-
     <section>
-       
-<p v-if="loading"> Laddar...</p>
-    <ul v-else>
-        <li v-for="(cup, id) in menu"
-            v-bind:key="id">
-           
-            <div class="add">
-                <img 
-                v-on:click="addToCart(cup)"
-                alt="Add a Cup " src="../assets/graphics/add.svg">
-            </div>
-            <p>
-                {{cup.title}}................ {{cup.price}}kr
-            </p>
-            <p>
-                {{cup.desc}}
-            </p>
-            <br>
-        </li>
-    </ul>
+        <p v-if="loading"> Laddar...</p>
+        <ul v-else>
+            <li v-for="(cup, id) in menu"
+                v-bind:key="id">
+
+                <div class="add">
+                    <img 
+                        v-on:click="addToCart(cup)"
+                        alt="Add a Cup " src="../assets/graphics/add.svg">
+                </div>
+                <p>
+                    {{cup.title}}................ {{cup.price}}kr
+                </p>
+                <p>
+                    {{cup.desc}}
+                </p>
+                <br>
+            </li>
+        </ul>
     </section>
-<footer class="bg-footer">
- </footer>
+    <footer class="bg-footer">
+    </footer>
 </div>
 </template>
 
@@ -56,50 +54,62 @@
 import OrderTotal from '@/components/OrderTotal.vue'
 import * as API from '@/api/index.js'
 export default {
-    components:{OrderTotal},
+components:{OrderTotal},
 
 
-   name:'OrderMeny',
-   data(){return{
-            loading:true,
-             cart:[],
-             showOrder: false,
-             cup:{
-                id:'',
-                title:'',
-                desc:'',
-                price:''
-             },
-    
-   
-   }},
-
-   methods:{
-       addToCart(cup){        
-                let cupExists = this.cart.find(el => el.id == cup.id)
-                
-                if(cupExists){
-                    cupExists.amount +=1; console.log(cupExists.id);}
-                else {this.cart.push({...cup, amount:1 });
-                }
+name:'OrderMeny',
+data(){
+    return{
+        loading:true,
+            cart:[],
+            showOrder: false,
+            cup:{
+            id:'',
+            title:'',
+            desc:'',
+            price:''
             },
+
+
+}},
+
+methods:{
+    addToCart(cup){        
+            let cupExists = this.cart.find(el => el.id == cup.id)
             
-       dropWindow(){
-            this.showOrder = true
-        },
-       hideOrder(){
-            this.showOrder = false
+            if(cupExists){
+                cupExists.amount +=1; console.log(cupExists.id);}
+            else {this.cart.push({...cup, amount:1 });
+            }
+    },
+        
+    dropWindow(){
+        this.showOrder = true
+    },
+    hideOrder(){
+        this.showOrder = false
+        // this.cart=[]
+    }
+
+
+},
+computed:{
+    totalAmount(){ 
+        let sum =0;
+        for(let cup of this.cart){
+        sum += cup.amount
+        }
+        return sum
         }
 
-
-   },
+},
 
 async mounted(){
     const menu = await API.fetchCoffe()
     this.menu = menu
     this.loading =false
-  }
-    
+}
+
 }
 </script>
 
@@ -110,63 +120,66 @@ li {list-style: none;}
     background-color: rgb(233, 201, 206);
     margin: 10px;
     padding: 50px;
-    }
+}
 
+.topIcon {
+    width: 2rem;
+    height: 2rem;
+}
 
-
-.topIcon {width: 2rem;
-         height: 2rem;
-         }
 .add {
-      width: 2rem;
-      height: 2rem;
-      background:black;
-      border-radius: 50%;
-      justify-items: center;
-      align-content: center;
-      position: absolute;
-      left: 235px;
+    width: 2rem;
+    height: 2rem;
+    background:black;
+    border-radius: 50%;
+    justify-items: center;
+    align-content: center;
+    right: 200px;
+    
       
-    }
+}
 
-.navicon {width: 3rem;
-      height: 3rem;
-      background:white;
-      border-radius: 50%;
-      justify-items: center;
-      align-content: center;
-      position: absolute;
-      top:0px;
-      left:0px; 
-      margin: 5px;
-         padding: 5px;
-      }
+.navicon {
+    width: 3rem;
+    height: 3rem;
+    background:white;
+    border-radius: 50%;
+    justify-items: center;
+    align-content: center;
+    position: absolute;
+    top:0px;
+    left:0px; 
+    margin: 5px;
+    padding: 5px;
+}
 
-.shoppingBag{width: 3rem;
-      height: 3rem;
-      background:black;
-      border-radius: 50%;
-      justify-items: center;
-      align-content: center;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      margin: 5px;
-      padding: 2px;
+.shoppingBag{
+    width: 3rem;
+    height: 3rem;
+    background:black;
+    border-radius: 50%;
+    justify-items: center;
+    align-content: center;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 5px;
+    padding: 2px;
 
-     }
-.counter{width: 1rem;
-      height: 1rem;
-      background:orangered;
-      border-radius: 50%;
-      justify-items: center;
-      align-content: center;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      }
+}
+.counter{
+    width: 1rem;
+    height: 1rem;
+    background:orangered;
+    border-radius: 50%;
+    justify-items: center;
+    align-content: center;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
 
-      .bg-header {
+.bg-header {
     background-image: url("../assets/graphics/graphics-header.svg"); /* The image used */
     background-color: transparent; /* Used if the image is unavailable */
     height: 200px; /* You must set a specified height */

@@ -5,6 +5,8 @@ import About from '../views/About.vue'
 import Navigation from '../views/Navigation.vue'
 import OrderMeny from '../views/OrderMeny.vue'
 import Eta from '../views/Eta.vue'
+import Inloggning from '../views/Inloggning.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +34,11 @@ const routes = [
     path: '/Eta',
     name: 'Eta',
     component: Eta
+  },
+  {
+    path: '/Inloggning',
+    name: 'Inloggning',
+    component: Inloggning
   },
   
 ]
